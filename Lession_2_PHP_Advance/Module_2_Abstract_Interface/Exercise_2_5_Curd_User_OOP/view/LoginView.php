@@ -1,51 +1,4 @@
-<?php
-require "../model/User.php";
-require '../dao/Crud.php';
-session_start();
-$username = $password = $msg = "";
-$usernameError = $emailError = $phoneError = $ageError = $passwordError = "";
-$errors = [$usernameError, $emailError, $phoneError, $ageError, $passwordError];
 
-
-$user = new User();
-$crud = new Crud;
-if (isset($_POST['login'])) {
-    $username = test_input($_POST['username']);
-$password = test_input($_POST['password']);
-
-    if (empty($_POST['username'])) {
-        $usernameError = "please enter username";
-    } else {
-        $user->setUsername($username);
-    }
-
-    if (empty($_POST['password'])) {
-        $passwordError = "please enter password";
-    } else {
-        $user->setPassword($password);
-    }
-
-    if (empty($usernameError) && empty($passwordError)) {
-        $check =  $crud->login($user);
-        if($check) {
-            $_SESSION['username'] = $username;
-            header("location:../view/listUser.php");
-        } else {
-            $msg = "Register Failed";
-            // header("location:../view/LoginView.php");
-        }
-        
-    }
-
-}
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-?> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,9 +14,6 @@ function test_input($data)
 
 <body>
     <div class="container ">
-    <div>
-            <?php echo $msg; ?>
-        </div>
         <!-- Create User -->
         <div class="btn_create-user mt-5 w-50 m-auto">
 
@@ -77,7 +27,7 @@ function test_input($data)
                 </button>
             </div>
             <!-- Form User -->
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form action="../controller/LoginController.php" method="post">
                 <!-- title -->
 
                 <!-- Fields -->
@@ -87,8 +37,10 @@ function test_input($data)
                         </label>
                         <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username" />
                         <div class="text-danger">
-                            <?php
-                            echo $usernameError;
+                            <?php 
+                                if(isset($errors['username'])) {
+                                    echo $errors['username'];
+                                }
                             ?>
                         </div>
                     </div>
@@ -98,8 +50,10 @@ function test_input($data)
                         </label>
                         <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" />
                         <div class="text-danger">
-                            <?php
-                            echo $passwordError;
+                            <?php 
+                                if(isset($errors['password'])) {
+                                    echo $errors['password'];
+                                }
                             ?>
                         </div>
                     </div>
@@ -114,7 +68,7 @@ function test_input($data)
                 </button>
                 <!-- </div> -->
                 <div>
-                    <a href="./createUser.php">Register</a>
+                    <a href="./RegisterView.php">Register</a>
                 </div>
             </form>
         </div>

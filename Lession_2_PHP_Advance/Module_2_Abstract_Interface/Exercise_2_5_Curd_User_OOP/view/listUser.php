@@ -1,10 +1,5 @@
 <?php
-require '../dao/Crud.php';
-session_start();
-
-$crud = new Crud;
-$check = $crud->getAllData();
-
+    include '../controller/HomeController.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +24,7 @@ $check = $crud->getAllData();
                     <span>
                         <i class="fa-solid fa-plus"></i>
                     </span>
-                    <a href="./createUser.php" alt="create user" class="text-white text-decoration-none">Create User</a>
+                    <a href="./RegisterView.php" alt="create user" class="text-white text-decoration-none">Create User</a>
                 </button>
             </div>
 
@@ -72,8 +67,8 @@ $check = $crud->getAllData();
                             <td><?php echo $user['age']; ?></td>
                             <td>
                                 <!-- <a href="student-view.php?id=<?php echo $user['id']; ?>" class="btn btn-info btn-sm">View</a> -->
-                                <a href="editUser.php?id=<?php echo $user['id']; ?>" class="btn btn-success btn-sm">Edit</a>
-                                <a href="deleteUser.php?id=<?php echo $user['id']; ?>" class="btn btn-success btn-sm">delete</a>
+                                <a href="#" class="btn btn-success btn-sm">Edit</a>
+                                <a href="#" class="btn btn-success btn-sm">delete</a>
                             </td>
                         </tr>
                     <?php

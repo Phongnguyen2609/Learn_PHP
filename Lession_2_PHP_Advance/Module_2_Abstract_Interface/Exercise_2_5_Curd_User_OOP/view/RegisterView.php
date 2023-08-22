@@ -1,73 +1,3 @@
-<?php
-require "../model/User.php";
-require '../dao/Crud.php';
-
-$msg = "";
-$username = $email = $phone = $age = $password = "";
-$usernameError = $emailError =  $phoneError = $ageError = $passwordError = "";
-$errors = [$usernameError, $emailError, $phoneError, $ageError, $passwordError];
-
-
-$user = new User();
-$crud = new Crud();
-if(isset($_POST['submit'])) {
-    $username = test_input($_POST['username']);
-$email = test_input($_POST['email']);
-$phone = test_input($_POST['phone']);
-$age = test_input($_POST['age']);
-$password = test_input($_POST['password']);
-
-    if (empty($_POST['username'])) {
-        $usernameError = "please enter username";
-    } else {
-        $user->setUsername($username);
-    }
-
-    if (empty($_POST['email'])) {
-        $emailError = "please enter email";
-    } else {
-        $user->setEmail($email);
-    }
-
-    if (empty($_POST['phone'])) {
-        $phoneError = "please enter phone";
-    } else {
-        $user->setPhone($phone);
-    }
-
-    if (empty($_POST['age'])) {
-        $ageError = "please enter age";
-    } else {
-        $user->setAge($age);
-    }
-
-    if (empty($_POST['password'])) {
-        $passwordError = "please enter password";
-    } else {
-        $user->setPassword($password);
-    }
-
-    if(empty($usernameError) && empty($emailError) 
-    && empty($phoneError) && empty($ageError) && empty($passwordError)){
-
-        $check = $crud->insert($user);
-        if($check ) {
-            $msg = "Register Successfully";
-            header("location:../view/LoginView.php");
-        } else {
-            $msg = "Register Failed";
-            header("location: ../view/CreateUser.php");
-        }
-    }
-
-}
-    function test_input($data){
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,9 +13,6 @@ $password = test_input($_POST['password']);
 
 <body>
     <div class="container ">
-        <div>
-            <?php echo $msg ?>
-        </div>
         <!-- Create User -->
         <div class="btn_create-user mt-5 w-50 m-auto">
 
@@ -98,26 +25,36 @@ $password = test_input($_POST['password']);
                 </button>
             </div>
             <!-- Form User -->
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form action="../controller/RegisterController.php" method="post">
                 <!-- title -->
 
                 <!-- Fields -->
                 <div class="modal-body">
-                    <input type="hiden" name="id">
+
                     <div class="mb-3">
                         <label for="username" class="form-label fw-bold">Username:
                         </label>
-                        <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username" />
+                        <input type="text" name="username" class="form-control" id="username"
+                            placeholder="Enter Username" />
                         <div class="text-danger">
-                            <?php echo $usernameError; ?>
+                            <?php
+                            if (isset($errors['username'])) {
+                                echo $errors['username'];
+                            }
+                            ?>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label fw-bold">Email: </label>
-                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email" />
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"
+                            placeholder="Enter Email" />
                         <div class="text-danger">
-                            <?php echo $emailError; ?>
+                            <?php
+                            if (isset($errors['email'])) {
+                                echo $errors['email'];
+                            }
+                            ?>
                         </div>
                     </div>
 
@@ -125,7 +62,11 @@ $password = test_input($_POST['password']);
                         <label for="phone" class="form-label fw-bold">Phone: </label>
                         <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Phone" />
                         <div class="text-danger">
-                            <?php echo $phoneError; ?>
+                            <?php
+                            if (isset($errors['phone'])) {
+                                echo $errors['phone'];
+                            }
+                            ?>
                         </div>
                     </div>
 
@@ -133,15 +74,24 @@ $password = test_input($_POST['password']);
                         <label for="age" class="form-label fw-bold">Age: </label>
                         <input type="text" name="age" class="form-control" id="age" placeholder="Enter Age" />
                         <div class="text-danger">
-                            <?php echo $ageError; ?>
+                            <?php
+                            if (isset($errors['age'])) {
+                                echo $errors['age'];
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label fw-bold">Password:
                         </label>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" />
+                        <input type="password" name="password" class="form-control" id="password"
+                            placeholder="Enter Password" />
                         <div class="text-danger">
-                            <?php echo $passwordError; ?>
+                            <?php
+                            if (isset($errors['password'])) {
+                                echo $errors['password'];
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -154,10 +104,10 @@ $password = test_input($_POST['password']);
                     Save changes
                 </button>
                 <!-- </div> -->
-                <div>
-                    <a href="./LoginView.php">login</a>
-                </div>
             </form>
+            <div>
+                <a href="LoginView.php">login</a>
+            </div>
         </div>
     </div>
 </body>
