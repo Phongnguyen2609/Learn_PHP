@@ -1,5 +1,72 @@
 <?php
-include_once "../controller/Create.php";
+require "../model/User.php";
+require '../dao/Crud.php';
+
+$msg = "";
+$username = $email = $phone = $age = $password = "";
+$usernameError = $emailError =  $phoneError = $ageError = $passwordError = "";
+$errors = [$usernameError, $emailError, $phoneError, $ageError, $passwordError];
+
+
+$user = new User();
+$crud = new Crud();
+if(isset($_POST['submit'])) {
+    $username = test_input($_POST['username']);
+$email = test_input($_POST['email']);
+$phone = test_input($_POST['phone']);
+$age = test_input($_POST['age']);
+$password = test_input($_POST['password']);
+
+    if (empty($_POST['username'])) {
+        $usernameError = "please enter username";
+    } else {
+        $user->setUsername($username);
+    }
+
+    if (empty($_POST['email'])) {
+        $emailError = "please enter email";
+    } else {
+        $user->setEmail($email);
+    }
+
+    if (empty($_POST['phone'])) {
+        $phoneError = "please enter phone";
+    } else {
+        $user->setPhone($phone);
+    }
+
+    if (empty($_POST['age'])) {
+        $ageError = "please enter age";
+    } else {
+        $user->setAge($age);
+    }
+
+    if (empty($_POST['password'])) {
+        $passwordError = "please enter password";
+    } else {
+        $user->setPassword($password);
+    }
+
+    if(empty($usernameError) && empty($emailError) 
+    && empty($phoneError) && empty($ageError) && empty($passwordError)){
+
+        $check = $crud->insert($user);
+        if($check ) {
+            $msg = "Register Successfully";
+            header("location:../view/LoginView.php");
+        } else {
+            $msg = "Register Failed";
+            header("location: ../view/CreateUser.php");
+        }
+    }
+
+}
+    function test_input($data){
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +74,7 @@ include_once "../controller/Create.php";
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Register</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
@@ -16,6 +83,9 @@ include_once "../controller/Create.php";
 
 <body>
     <div class="container ">
+        <div>
+            <?php echo $msg ?>
+        </div>
         <!-- Create User -->
         <div class="btn_create-user mt-5 w-50 m-auto">
 
@@ -25,21 +95,21 @@ include_once "../controller/Create.php";
                     <a href="./listUser.php">
                         <i class="fa-solid fa-xmark"></i>
                     </a>
-
                 </button>
             </div>
             <!-- Form User -->
-            <form action="../controller/Create.php" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <!-- title -->
 
                 <!-- Fields -->
                 <div class="modal-body">
+                    <input type="hiden" name="id">
                     <div class="mb-3">
                         <label for="username" class="form-label fw-bold">Username:
                         </label>
                         <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username" />
                         <div class="text-danger">
-                            <!-- <?php echo $errors[$username] ?> -->
+                            <?php echo $usernameError; ?>
                         </div>
                     </div>
 
@@ -66,27 +136,6 @@ include_once "../controller/Create.php";
                             <?php echo $ageError; ?>
                         </div>
                     </div>
-
-                    <!-- <div class="mb-3">
-                        <label for="" class="form-label fw-bold">Gender: </label>
-                        <div class="d-flex">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gender" id="female" />
-                                <label class="form-check-label" for="female"> Female </label>
-                            </div>
-                            <div class="form-check ms-2">
-                                <input class="form-check-input" type="radio" name="gender" id="male" />
-                                <label class="form-check-label" for="male"> Male </label>
-                            </div>
-                            <div class="form-check ms-2">
-                                <input class="form-check-input" type="radio" name="gender" id="orther" />
-                                <label class="form-check-label" for="orther"> Orther </label>
-                            </div>
-                        </div>
-                        <div class="text-danger">
-                            <?php echo $genderError; ?>
-                        </div>
-                    </div> -->
                     <div class="mb-3">
                         <label for="password" class="form-label fw-bold">Password:
                         </label>

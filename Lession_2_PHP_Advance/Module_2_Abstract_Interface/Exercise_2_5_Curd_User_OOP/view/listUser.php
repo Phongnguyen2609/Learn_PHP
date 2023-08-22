@@ -1,11 +1,18 @@
+<?php
+require '../dao/Crud.php';
+session_start();
 
+$crud = new Crud;
+$check = $crud->getAllData();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crud Form</title>
+    <title>List User</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
@@ -15,15 +22,27 @@
 <body>
     <div class="container">
         <!-- Create User -->
-        <div class="btn_create-user mt-5">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" >
-                <span>
-                    <i class="fa-solid fa-plus"></i>
-                </span>
+        <div class="d-flex justify-content-between mt-5">
+            <div class="btn_create-user">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary">
+                    <span>
+                        <i class="fa-solid fa-plus"></i>
+                    </span>
+                    <a href="./createUser.php" alt="create user" class="text-white text-decoration-none">Create User</a>
+                </button>
+            </div>
 
-                <a href="./createUser.php" alt="create user" class="text-white text-decoration-none">Create User</a>
-            </button>
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <?php if (isset($_SESSION['username'])) {
+                        echo $_SESSION['username'];
+                    } ?>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                </ul>
+            </div>
 
         </div>
 
@@ -37,28 +56,29 @@
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Age</th>
-                        <th scope="col">Gender</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    <?php
+
+                    foreach ($check as $user) {
+                    ?>
+                        <tr>
+                            <td><?php echo $user['id']; ?></td>
+                            <td><?php echo $user['username']; ?></td>
+                            <td><?php echo $user['email']; ?></td>
+                            <td><?php echo $user['phone']; ?></td>
+                            <td><?php echo $user['age']; ?></td>
+                            <td>
+                                <!-- <a href="student-view.php?id=<?php echo $user['id']; ?>" class="btn btn-info btn-sm">View</a> -->
+                                <a href="editUser.php?id=<?php echo $user['id']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                <a href="deleteUser.php?id=<?php echo $user['id']; ?>" class="btn btn-success btn-sm">delete</a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

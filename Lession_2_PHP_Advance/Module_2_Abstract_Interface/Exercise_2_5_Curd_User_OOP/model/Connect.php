@@ -1,8 +1,8 @@
 <?php
 
 class Connect {
-    private $servername = "mysql:host=localhost;dbname=demo";
-    // private $servername = "mysql:host=localhost;port=4306;dbname=demo";
+    // private $servername = "mysql:host=localhost;dbname=demo";
+    private $servername = "mysql:host=localhost;port=4306;dbname=demo";
     private $username = "root";
     private $password = "";
     public $conn;
