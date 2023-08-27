@@ -5,13 +5,17 @@ class Customer {
     private $email;
     private $phone;
     private $address;
+    private $role;
+    private $password;
 
-    public function __construct($username = "",  $email = "",  $phone ="", $address ="",)
+    public function __construct($username = "",  $email = "",  $phone ="", $address ="", $role = "", $password = "")
     {
         $this->username = $username;
         $this->email = $email;
         $this->phone = $phone;
         $this->address = $address;
+        $this->role = $role;
+        $this->password = $password;
     }
 
         // SETTER + GETTER
@@ -63,5 +67,25 @@ class Customer {
         public function getAddress()
         {
             return $this->address;
+        }
+
+        public function setRole($role)
+        {
+            $this->role = $role;
+        }
+    
+        public function getRole()
+        {
+            return $this->role;
+        }
+
+        public function setPassword($password)
+        {
+            $this->password = $password;
+        }
+    
+        public function getPassword()
+        {
+            return $this->password;
         }
 }
