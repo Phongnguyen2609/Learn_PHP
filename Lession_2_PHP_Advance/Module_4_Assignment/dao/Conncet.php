@@ -12,7 +12,6 @@ class Connect {
          try{
              $this->conn = new PDO($this->servername, $this->username, $this->password);
              $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-             // echo "Connect successfully";
          } catch (PDOException $e) {
              echo $e->getMessage();
          }

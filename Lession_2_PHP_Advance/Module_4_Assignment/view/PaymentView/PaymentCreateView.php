@@ -8,7 +8,7 @@ include_once '../../controller/ShippingController/ShippingCreateController.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Shipping</title>
+    <title>Create Payment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
@@ -21,9 +21,9 @@ include_once '../../controller/ShippingController/ShippingCreateController.php';
         <div class="btn_create-user mt-5 w-50 m-auto border">
 
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Shipping</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Payment</h5>
                 <button>
-                    <a href="./ShippingListView.php">
+                    <a href="./PaymentListView.php">
                         <i class="fa-solid fa-xmark"></i>
                     </a>
                 </button>
@@ -34,12 +34,12 @@ include_once '../../controller/ShippingController/ShippingCreateController.php';
                 <input type="hidden" name="id">
                     <!-- delivery address -->
                     <div class="mb-2">
-                        <label for="delivery_address" class="form-label fw-bold">Shipping: </label>
-                        <input type="text" name="shipping_type" class="form-control" id="shipping_type" placeholder="Enter Shipping Type" />
+                        <label for="payment_type" class="form-label fw-bold">Payment: </label>
+                        <input type="text" name="payment_type" class="form-control" id="payment_type" placeholder="Enter Payment Type" />
                         <div class="text-danger">
                             <?php
-                            if (isset($errors['shipping_type'])) {
-                                echo $errors['shipping_type'];
+                            if (isset($errors['payment_type'])) {
+                                echo $errors['payment_type'];
                             }
                             ?>
                         </div>

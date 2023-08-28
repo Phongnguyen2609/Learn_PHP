@@ -1,6 +1,20 @@
 <?php
-include_once '../../controller/ShippingController/ShippingCreateController.php';
+include_once '../../controller/PaymentController/PaymentCreateUpdateController.php';
+// include_once '../../dao/PaymentDao.php';
 // khi inclue 2 file controller thì nó sẽ báo là connect không thể được khai báo , bởi vì Connect đã được sủ dụng
+
+if (isset($_GET['id'])) {
+    $paymentDao = new PaymentDao;
+
+    $id = $_GET['id'];
+    $result = $paymentDao->detailPayment($id);
+
+
+    foreach ($result as $item) {
+        $id = $item['id'];
+        $paymentType = $item['payment_type'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,15 +45,15 @@ include_once '../../controller/ShippingController/ShippingCreateController.php';
             <!-- Form User -->
             <form method="post">
                 <div class="modal-body">
-                <input type="hidden" name="id">
+                <input type="hidden" name="id" value="<?php echo $id ?>">
                     <!-- delivery address -->
                     <div class="mb-2">
-                        <label for="delivery_address" class="form-label fw-bold">Shipping: </label>
-                        <input type="text" name="shipping_type" class="form-control" id="shipping_type" placeholder="Enter Shipping Type" />
+                        <label for="payment_type" class="form-label fw-bold">Payment: </label>
+                        <input type="text" name="payment_type" class="form-control" id="payment_type" placeholder="Enter Shipping Type" value="<?php echo $paymentType ?>"/>
                         <div class="text-danger">
                             <?php
-                            if (isset($errors['shipping_type'])) {
-                                echo $errors['shipping_type'];
+                            if (isset($errors['payment_type'])) {
+                                echo $errors['payment_type'];
                             }
                             ?>
                         </div>
@@ -49,7 +63,7 @@ include_once '../../controller/ShippingController/ShippingCreateController.php';
                     <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">
                         Reset
                     </button>
-                    <button type="submit" name="submitShipping" class="btn btn-primary">
+                    <button type="submit" name="submitPayment" class="btn btn-primary">
                         submit
                     </button>
                 </div>

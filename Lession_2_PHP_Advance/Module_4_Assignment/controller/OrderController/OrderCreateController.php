@@ -13,6 +13,8 @@ $orderDao = new OrderDao;
 
 $customers = $orderDao->getAllCustomer();
 $products = $orderDao->getAllProduct();
+$shippings = $orderDao->getAllShipping();
+$payments = $orderDao->getAllPayment();
 if (isset($_POST['submitOrder'])) {
     function test_input($data)
     {
@@ -24,8 +26,8 @@ if (isset($_POST['submitOrder'])) {
     $customerId = test_input($_POST['customer_id']);
     $productId = test_input($_POST['product_id']);
     $quantity = test_input($_POST['quantity']);
-    $shipping = test_input($_POST['shipping']);
-    $payment = test_input($_POST['payment']);
+    $shipping = test_input($_POST['shipping_id']);
+    $payment = test_input($_POST['payment_id']);
 
     // ngày tạo là ngày đặt order
     $created_date = new DateTime();
@@ -52,16 +54,18 @@ if (isset($_POST['submitOrder'])) {
     //check dữ liệu quantity
     $productDetail = $orderDao->detailProduct($productId);
     $productQuantity = $productPrice = "";
-    foreach($productDetail as $item){
+    foreach ($productDetail as $item) {
         $productQuantity = $item['quantity'];
         $productPrice = $item['price'];
     }
-    if($quantity > $productQuantity){
+    if ($quantity > $productQuantity) {
         $errors['quantity'] = "The quantity purchased cannot be greater than the quantity in stock. the remaining number is " . $productQuantity;
     }
 
-    // if()
-    if (empty($completion_time)) {
+    // lấy id product lấy ra giá trị tiền
+    $total = intval($quantity) * floatval($productPrice);
+
+    if (empty($dateTime)) {
         $errors['completion_time'] = "please enter completion date";
     }
 
@@ -70,19 +74,24 @@ if (isset($_POST['submitOrder'])) {
         $errors['completion_time'] = "Delivery date must not be less than order creation date";
     }
 
+    if (empty($shipping)) {
+        $errors['shipping_id'] = "please choose shipping";
+    }
+
+    if (empty($payment)) {
+        $errors['payment_id'] = "please choose payment";
+    }
+
     if (count($errors) === 0) {
         $order->setCustomerId($customerId);
         $order->setProductId($productId);
         $order->setQuantity($quantity);
-        // lấy id product lấy ra giá trị tiền
-        $total = $quantity * $productPrice;
         $order->setTotal($total);
         $order->setShipping($shipping);
         $order->setPayment($payment);
         $order->setCreatedDate($created);
         $order->setCompletionTime($convert_completion_time);
         $order->setNote($note);
-
 
         $result = $orderDao->addOrder($order);
 
@@ -97,8 +106,7 @@ if (isset($_POST['submitOrder'])) {
 
         if ($result === true && $updateProductQuantity == true) {
             header('location: ../../view/OrderView/OrderListView.php');
+            // header('location: ../../view/ShippingView/ShippingCreateView.php');
         }
-    } else {
-        include '../../view/OrderView/OrderCreateView.php';
     }
 }

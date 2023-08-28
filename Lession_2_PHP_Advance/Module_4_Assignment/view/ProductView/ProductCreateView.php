@@ -1,3 +1,6 @@
+<?php
+    include_once '../../controller/ProductController/ProductCreateUpdateController.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <?php include '../header.php';?>
 </head>
 
 <body>
@@ -26,7 +30,7 @@
                 </button>
             </div>
             <!-- Form User -->
-            <form action="../../controller/ProductController/ProductCreateController.php" method="post" enctype="multipart/form-data">
+            <form method="post">
                 <!-- title -->
 
                 <!-- Fields -->
@@ -43,18 +47,6 @@
                             }
                             ?>
                         </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="fileUpload" class="form-label fw-bold">Image: </label>
-                        <input type="file" name="fileUpload" class="form-control" id="fileUpload" />
-                        <!-- <div class="text-danger">
-                            <?php
-                            if (isset($errors['image'])) {
-                                echo $errors['image'];
-                            }
-                            ?>
-                        </div> -->
                     </div>
 
                     <div class="mb-3">

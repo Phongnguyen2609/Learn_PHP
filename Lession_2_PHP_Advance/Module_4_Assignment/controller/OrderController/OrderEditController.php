@@ -1,15 +1,19 @@
 <?php
 include_once '../../model/Order.php';
+include_once '../../model/Product.php';
 include_once "../../dao/OrderDao.php";
 
 $errors = array(); // tạo 1 mảng lỗi
 $customerId = $productId = $quantity = $total = $shipping = $payment = $created_date = $completion_time = $note = ""; // khởi tạo giá trị
+$productQuantity = $productPrice = $newQuantity = $oldQuantityOrder = "";
 
 $order = new Order;
 $orderDao = new OrderDao;
 
 $customers = $orderDao->getAllCustomer();
 $products = $orderDao->getAllProduct();
+$shippings = $orderDao->getAllShipping();
+$payments = $orderDao->getAllPayment();
 if (isset($_POST['submitEditOrder'])) {
     function test_input($data)
     {
@@ -22,16 +26,12 @@ if (isset($_POST['submitEditOrder'])) {
     $customerId = test_input($_POST['customer_id']);
     $productId = test_input($_POST['product_id']);
     $quantity = test_input($_POST['quantity']);
-    $shipping = test_input($_POST['shipping']);
-    $payment = test_input($_POST['payment']);
+    $shipping = test_input($_POST['shipping_id']);
+    $payment = test_input($_POST['payment_id']);
     // $created = $order->getCreatedDate();
     $dateTime = test_input($_POST['completion_time']);
     $completion_time = new DateTime($dateTime);
-
     $convert_completion_time = $completion_time->format('Y-m-d');
-
-    // var_dump($convert_completion_date);
-    // die;
 
     $note = test_input($_POST['note']);
 
@@ -47,9 +47,29 @@ if (isset($_POST['submitEditOrder'])) {
         $errors['quantity'] = "please enter quantity";
     }
 
-    // if()
-    if (empty($completion_time)) {
-        $errors['completion_date'] = "please enter completion date";
+    //check dữ liệu quantity
+    $productDetail = $orderDao->detailProduct($productId);
+
+    // lấy ra giá trị của product
+    foreach ($productDetail as $item) {
+        $productQuantity = $item['quantity'];
+        $productPrice = $item['price'];
+    }
+    if ($quantity > $productQuantity) {
+        $errors['quantity'] = "The quantity purchased cannot be greater than the quantity in stock. the remaining number is " . $productQuantity;
+    }
+    // lấy id product lấy ra giá trị tiền
+    $total = intval($quantity) * floatval($productPrice);
+
+
+    $detailOrder = $orderDao->detailOrder($id);
+    foreach($detailOrder as $item){
+        $created = $item['created_date'];
+        $oldQuantityOrder = $item['quantity'];
+    }
+
+    if (empty($dateTime)) {
+        $errors['completion_time'] = "please enter completion date";
     }
 
     $compareResult = strcmp($created, $convert_completion_time);
@@ -61,14 +81,24 @@ if (isset($_POST['submitEditOrder'])) {
         $order->setCustomerId($customerId);
         $order->setProductId($productId);
         $order->setQuantity($quantity);
+        $order->setTotal($total);
         $order->setShipping($shipping);
         $order->setPayment($payment);
         $order->setCompletionTime($convert_completion_time);
         $order->setNote($note);
 
         $result = $orderDao->updateOrder($id, $order);
-        // var_dump($result);
-        // die;
+
+        // update quantity của bảng product
+        // sẽ truyền vào 2 giá trị đó là id của product và giá trị của quantity product
+        // id thì chính là product_id;
+        // quantity sẽ là trừ đi từ quantity order
+
+        // ví dụ  10-(5-7)
+        $resultQuantity = $productQuantity - ($quantity - $oldQuantityOrder);
+        $ObjProduct = new Product;
+        $ObjProduct->setQuantity($resultQuantity);
+        $updateProductQuantity = $orderDao->updateProductQuantity($productId, $ObjProduct);
         if ($result) {
             header('location: ../../view/OrderView/OrderListView.php');
         }

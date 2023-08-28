@@ -1,5 +1,5 @@
 <?php
-    include '../../controller/CustomerController/CustomerListController.php';
+include '../../controller/CustomerController/CustomerListController.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,9 +12,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <?php include '../header.php';?>
 </head>
 
 <body>
+
     <div class="container">
         <!-- Create User -->
         <div class="d-flex justify-content-between mt-5">
@@ -67,7 +69,7 @@
                             <td>
                                 <!-- <a href="student-view.php?id=<?php echo $customer['id']; ?>" class="btn btn-info btn-sm">View</a> -->
                                 <a href="CustomerEditView.php?id=<?php echo $customer['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="../controller/CustomerListController.php?id=<?php echo $customer['id']; ?>"  class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">delete</a>
+                                <a href="../controller/CustomerListController.php?id=<?php echo $customer['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">delete</a>
                             </td>
                         </tr>
                     <?php

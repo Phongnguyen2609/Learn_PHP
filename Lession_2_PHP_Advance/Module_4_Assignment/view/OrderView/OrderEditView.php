@@ -26,8 +26,13 @@ if (isset($_GET['id'])) {
 
         $quantity = $item['quantity'];
         $total = $item['total'];
-        $shipping = $item['shipping'];
-        $payment = $item['payment'];
+
+        $shippingId = $item['shipping_id'];
+        // $shippingDetail = $orderDao->detailShipping($shippingId);
+        // foreach($shippingDetail as )
+        // var_dump($shippingId);
+        // die;
+        $paymentId = $item['payment_id'];
         $completion_time = $item['completion_time'];
         $note = $item['note'];
     }
@@ -44,6 +49,7 @@ if (isset($_GET['id'])) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <?php include '../header.php'; ?>
 </head>
 
 <body>
@@ -71,8 +77,17 @@ if (isset($_GET['id'])) {
                             <?php
                             if ($customers != 0) {
                                 foreach ($customers as $customer) {
+                                    if ($customerId === $customer['id']) {
                             ?>
-                                    <option class="text-black" value="<?php echo $customer['id'] ?>"><?php echo $customer['username'] ?></option>
+                                        <!-- disable -->
+                                        <option class="text-black" value="<?php echo $customer['id'] ?>" disabled><?php echo $customer['username'] ?></option>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <option class="text-black" value="<?php echo $customer['id'] ?>"><?php echo $customer['username'] ?></option>
+                                    <?php
+                                    }
+                                    ?>
                             <?php
                                 }
                             } else {
@@ -128,77 +143,71 @@ if (isset($_GET['id'])) {
                         </div>
                     </div>
 
-                    <!-- Total -->
-                    <div class="mb-2">
-                        <label for="quantity" class="form-label fw-bold">Total: </label>
-                        <input type="number" name="total" class="form-control" id="quantity" value="<?php echo $total; ?>" />
-                        <!-- <div class="text-danger">
-                            <?php
-                            if (isset($errors['quantity'])) {
-                                echo $errors['quantity'];
-                            }
-                            ?>
-                        </div> -->
-                    </div>
-
                     <!-- Shipping -->
                     <div class="mb-2">
                         <label for="shipping" class="form-label fw-bold">Shiping: </label>
                         <div class="d-flex">
-                            <div class="form-check">
-                                <input class="form-check-input" name="shipping" type="radio" id="flexRadioDefault1" value="Fast Shipping">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Fast Shipping
-                                </label>
-                            </div>
-                            <div class="form-check ms-4">
-                                <input class="form-check-input" type="radio" name="shipping" id="flexRadioDefault2" checked value="Economical delivery">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Economical delivery
-                                </label>
-                            </div>
-                        </div>
-                        <!-- <input type="text" name="shipping" class="form-control" id="shipping" placeholder="Enter Shipping" />
-                        <div class="text-danger">
                             <?php
-                            if (isset($errors['shipping'])) {
-                                echo $errors['shipping'];
+                            foreach ($shippings as $shipping) {
+                            ?>
+                                <div class="form-check ms-3">
+                                    <!-- Nếu bằng nhau thì cho selected -->
+                                    <?php
+                                    if ($shippingId == $shipping['id']) {
+                                    ?>
+                                        <input class="form-check-input" name="shipping_id" type="radio" value="<?php echo $shipping['id'] ?>" checked>
+                                        <label class="form-check-label" for="">
+                                            <?php echo $shipping['shipping_type']; ?>
+                                        </label>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <input class="form-check-input" name="shipping_id" type="radio" value="<?php echo $shipping['id'] ?>">
+                                        <label class="form-check-label" for="">
+                                            <?php echo $shipping['shipping_type']; ?>
+                                        </label>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                            <?php
                             }
                             ?>
-                        </div> -->
+                        </div>
                     </div>
 
                     <!-- Payment -->
                     <div class="mb-2">
-                        <label for="password" class="form-label fw-bold">Payment: </label>
+                        <label for="shipping" class="form-label fw-bold">Payment: </label>
                         <div class="d-flex">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault1" value="Cash Payment">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Cash Payment
-                                </label>
-                            </div>
-                            <div class="form-check ms-4">
-                                <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault2" checked value="Banking Transfer Payment">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Banking Transfer Payment
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 
-                    Create Date
-                    <div class="mb-2">
-                        <label for="password" class="form-label fw-bold">Password: </label>
-                        <input type="date" name="create_date" class="form-control" id="create_date" placeholder="Enter Password" />
-                        <div class="text-danger">
                             <?php
-                            if (isset($errors['create_date'])) {
-                                echo $errors['create_date'];
+                            foreach ($payments as $payment) {
+                            ?>
+                                <div class="form-check ms-3">
+                                    <!-- Nếu bằng nhau thì cho selected -->
+                                    <?php
+                                    if ($paymentId == $payment['id']) {
+                                    ?>
+                                        <input class="form-check-input" name="payment_id" type="radio" value="<?php echo $payment['id'] ?>" checked>
+                                        <label class="form-check-label" for="">
+                                            <?php echo $payment['payment_type']; ?>
+                                        </label>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <input class="form-check-input" name="payment_id" type="radio" value="<?php echo $payment['id'] ?>">
+                                        <label class="form-check-label" for="">
+                                            <?php echo $payment['payment_type']; ?>
+                                        </label>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                            <?php
                             }
                             ?>
                         </div>
-                    </div> -->
+                    </div>
 
                     <!-- completion date -->
                     <div class="mb-2">

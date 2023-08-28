@@ -13,6 +13,7 @@ include_once '../../controller/OrderController/OrderCreateController.php';
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <?php include '../header.php';?>
 </head>
 
 <body>
@@ -106,60 +107,53 @@ include_once '../../controller/OrderController/OrderCreateController.php';
                     <div class="mb-2">
                         <label for="shipping" class="form-label fw-bold">Shiping: </label>
                         <div class="d-flex">
-                            <div class="form-check">
-                                <input class="form-check-input" name="shipping" type="radio" id="flexRadioDefault1" value="Fast Shipping">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Fast Shipping
-                                </label>
-                            </div>
-                            <div class="form-check ms-4">
-                                <input class="form-check-input" type="radio" name="shipping" id="flexRadioDefault2" checked value="Economical delivery">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Economical delivery
-                                </label>
-                            </div>
-                        </div>
-                        <!-- <input type="text" name="shipping" class="form-control" id="shipping" placeholder="Enter Shipping" />
-                        <div class="text-danger">
                             <?php
-                            if (isset($errors['shipping'])) {
-                                echo $errors['shipping'];
+                            foreach ($shippings as $shipping) {
+                            ?>
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" name="shipping_id" type="radio" value="<?php echo $shipping['id'] ?>">
+                                    <label class="form-check-label" for="">
+                                        <?php echo $shipping['shipping_type']; ?>
+                                    </label>
+                                </div>
+                            <?php
                             }
                             ?>
-                        </div> -->
+                        </div>
+                        <div class="text-danger">
+                            <?php
+                            if (isset($errors['shipping_id'])) {
+                                echo $errors['shipping_id'];
+                            }
+                            ?>
+                        </div>
                     </div>
 
                     <!-- Payment -->
                     <div class="mb-2">
-                        <label for="password" class="form-label fw-bold">Payment: </label>
+                        <label for="shipping" class="form-label fw-bold">Payment: </label>
                         <div class="d-flex">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault1" value="Cash Payment">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Cash Payment
-                                </label>
-                            </div>
-                            <div class="form-check ms-4">
-                                <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault2" checked value="Banking Transfer Payment">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Banking Transfer Payment
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 
-                    Create Date
-                    <div class="mb-2">
-                        <label for="password" class="form-label fw-bold">Password: </label>
-                        <input type="date" name="create_date" class="form-control" id="create_date" placeholder="Enter Password" />
-                        <div class="text-danger">
                             <?php
-                            if (isset($errors['create_date'])) {
-                                echo $errors['create_date'];
+                            foreach ($payments as $payment) {
+                            ?>
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" name="payment_id" type="radio" value="<?php echo $payment['id'] ?>">
+                                    <label class="form-check-label" for="">
+                                        <?php echo $payment['payment_type']; ?>
+                                    </label>
+                                </div>
+                            <?php
                             }
                             ?>
                         </div>
-                    </div> -->
+                        <div class="text-danger">
+                            <?php
+                            if (isset($errors['payment_id'])) {
+                                echo $errors['payment_id'];
+                            }
+                            ?>
+                        </div>
+                    </div>
 
                     <!-- completion date -->
                     <div class="mb-2">

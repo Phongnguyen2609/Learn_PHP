@@ -21,14 +21,12 @@ class ProductDao extends Connect{
 
     public function addProduct(Product $product){
         $name = $product->getName();
-        $image = $product->getImage();
         $price = $product->getPrice();
         $quantity = $product->getQuantity();
         $description = $product->getDescription();
-        $query = 'INSERT INTO products (name, image, price, quantity, description) VALUES (:name, :image, :price, :quantity, :description)';
+        $query = 'INSERT INTO products (name, price, quantity, description) VALUES (:name, :price, :quantity, :description)';
         $result = $this->conn->prepare($query);
         $result->bindValue(":name", $name, PDO::PARAM_STR);
-        $result->bindValue(":image", $image, PDO::PARAM_STR);
         $result->bindValue(":price", $price, PDO::PARAM_STR);
         $result->bindValue(":quantity", $quantity, PDO::PARAM_STR);
         $result->bindValue(":description", $description, PDO::PARAM_STR);
@@ -41,10 +39,9 @@ class ProductDao extends Connect{
     }
 
     public function updateProduct($id, Product $product){
-        $sql = "UPDATE products SET name=:name, image=:image, price=:price, quantity=:quantity, description=:description WHERE id=:id";
+        $sql = "UPDATE products SET name=:name, price=:price, quantity=:quantity, description=:description WHERE id=:id";
         $result = $this->conn->prepare($sql);
         $result->bindValue(":name", $product->getName(), PDO::PARAM_STR);
-        $result->bindValue(":image", $product->getImage(), PDO::PARAM_STR);
         $result->bindValue(":price", $product->getPrice(), PDO::PARAM_STR);
         $result->bindValue(":quantity", $product->getQuantity(), PDO::PARAM_STR);
         $result->bindValue(":description", $product->getDescription(), PDO::PARAM_STR);

@@ -2,6 +2,13 @@
 include_once '../../controller/OrderController/OrderListController.php';
 include_once '../../dao/OrderDao.php';
 $orderDao = new OrderDao;
+$resultIndex = $order->getCountOrder();
+// var_dump($resultIndex);
+// die;
+$resultQuantity = $order->getSumQuantityOrder();
+// var_dump($resultQuantity);
+// die;
+$resultTotalOrder = $order->getSumTotalOrder();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,11 +21,12 @@ $orderDao = new OrderDao;
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <?php include '../header.php'; ?>
 </head>
 
 <body>
-    <div class="container">
 
+    <div class="container">
         <!-- Create User -->
         <div class="d-flex justify-content-between mt-5">
             <div class="btn_create-user">
@@ -30,18 +38,6 @@ $orderDao = new OrderDao;
                     <a href="./OrderCreateView.php" alt="create product" class="text-white text-decoration-none">Create Order</a>
                 </button>
             </div>
-
-            <!-- <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php if (isset($_SESSION['username'])) {
-                        echo $_SESSION['username'];
-                    } ?>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                </ul>
-            </div> -->
-
         </div>
 
         <!-- Table list User -->
@@ -53,6 +49,7 @@ $orderDao = new OrderDao;
                         <th scope="col">customer</th>
                         <th scope="col">Product</th>
                         <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
                         <th scope="col">Shipping</th>
                         <th scope="col">Payment</th>
                         <th scope="col">Created date</th>
@@ -65,36 +62,15 @@ $orderDao = new OrderDao;
                     <?php
                     if ($orders != 0) {
                         foreach ($orders as $order) {
-                            // var_dump($order); die;
-
                     ?>
                             <tr>
                                 <td><?php echo $order['id'] ?></td>
-                                <?php
-                                $customerDetai = $orderDao->detailCustomer($order['customer_id']);
-                                foreach ($customerDetai as $customer) {
-                                    $customerName = $customer['username'];
-                                ?>
-                                    <td><?php echo $customerName; ?></td>
-                                <?php
-                                }
-                                ?>
-
-                                <?php
-                                $productDetail = $orderDao->detailProduct($order['product_id']);
-                                foreach ($productDetail as $product) {
-                                    $productName = $product['name'];
-                                ?>
-                                    <td><?php echo $productName; ?></td>
-                                <?php
-                                }
-                                ?>
-                                <!-- 
                                 <td><?php echo $order['username'] ?></td>
-                                <td><?php echo $order['name'] ?></td> -->
+                                <td><?php echo $order['name'] ?></td>
                                 <td><?php echo $order['quantity'] ?></td>
-                                <td><?php echo $order['shipping']; ?></td>
-                                <td><?php echo $order['payment']; ?></td>
+                                <td><?php echo $order['total'] ?></td>
+                                <td><?php echo $order['shipping_type']; ?></td>
+                                <td><?php echo $order['payment_type']; ?></td>
                                 <td><?php echo $order['created_date']; ?></td>
                                 <td><?php echo $order['completion_time']; ?></td>
                                 <td><?php echo $order['note']; ?></td>
@@ -115,9 +91,14 @@ $orderDao = new OrderDao;
                     ?>
                 </tbody>
             </table>
+            <!-- Tính tổng đơn hàng -->
+            <div class="d-flex justify-content-evenly">
+                <span class="fw-bold">Number of orders: <?php echo $resultIndex; ?></span>
+                <span class="fw-bold">Total Product: <?php echo $resultQuantity ?></span>
+                <span class="fw-bold">Total Price Order: <?php echo $resultTotalOrder ?></span>
+            </div>
         </div>
     </div>
-    <script></script>
 </body>
 
 </html>

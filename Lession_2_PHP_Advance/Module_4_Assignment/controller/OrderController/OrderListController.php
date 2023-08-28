@@ -2,11 +2,9 @@
 include '../../dao/OrderDao.php';
 
 $order = new OrderDao;
-// $orders = $order->getAllOrderMultipTable();
-$orders = $order->getAllOrder();
-// var_dump($customers);
-// die;
-// $products = $order->getAllProduct();
+$orders = $order->getAllOrderMultipTable();
+
+$resultTotalOrder = $resultQuantity = $resultIndex = ""; 
 
 if(isset($_GET['id'])){
 

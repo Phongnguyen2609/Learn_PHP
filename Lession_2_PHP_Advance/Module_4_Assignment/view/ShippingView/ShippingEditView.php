@@ -1,6 +1,19 @@
 <?php
 include_once '../../controller/ShippingController/ShippingCreateController.php';
 // khi inclue 2 file controller thì nó sẽ báo là connect không thể được khai báo , bởi vì Connect đã được sủ dụng
+
+if (isset($_GET['id'])) {
+    $shippingDao = new ShippingDao;
+
+    $id = $_GET['id'];
+    $result = $shippingDao->detailShipping($id);
+
+
+    foreach ($result as $item) {
+        $id = $item['id'];
+        $shippingType = $item['shipping_type'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,11 +44,11 @@ include_once '../../controller/ShippingController/ShippingCreateController.php';
             <!-- Form User -->
             <form method="post">
                 <div class="modal-body">
-                <input type="hidden" name="id">
+                <input type="hidden" name="id" value="<?php echo $id ?>">
                     <!-- delivery address -->
                     <div class="mb-2">
                         <label for="delivery_address" class="form-label fw-bold">Shipping: </label>
-                        <input type="text" name="shipping_type" class="form-control" id="shipping_type" placeholder="Enter Shipping Type" />
+                        <input type="text" name="shipping_type" class="form-control" id="shipping_type" placeholder="Enter Shipping Type" value="<?php echo $shippingType ?>"/>
                         <div class="text-danger">
                             <?php
                             if (isset($errors['shipping_type'])) {
