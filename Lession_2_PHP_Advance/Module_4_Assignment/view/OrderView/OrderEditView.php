@@ -235,7 +235,7 @@ if (isset($_GET['id'])) {
                         </div>
                     </div>
                 </div>
-                <div class="form_footer mb-3 ms-3">
+                <div class="modal-footer">
                     <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">
                         Reset
                     </button>

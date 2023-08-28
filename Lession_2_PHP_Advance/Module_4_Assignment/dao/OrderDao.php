@@ -10,7 +10,7 @@ class OrderDao extends Connect
 
     public function getAllOrder()
     {
-        $query = "SELECT id, customer_id, product_id, quantity, shipping, payment, created_date, completion_time, note FROM orders";
+        $query = "SELECT id, customer_id, product_id, quantity, shipping_id, payment_id, created_date, completion_time, note FROM orders";
         $result = $this->conn->prepare($query);
         $result->execute();
         $orders = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -30,8 +30,8 @@ class OrderDao extends Connect
         $result->bindValue(":product_id", $order->getProductId(), PDO::PARAM_INT);
         $result->bindValue(":quantity", $order->getQuantity(), PDO::PARAM_INT);
         $result->bindValue(":total", $order->getTotal(), PDO::PARAM_INT);
-        $result->bindValue(":shipping_id", $order->getShipping(), PDO::PARAM_INT);
-        $result->bindValue(":payment_id", $order->getPayment(), PDO::PARAM_INT);
+        $result->bindValue(":shipping_id", $order->getShippingId(), PDO::PARAM_INT);
+        $result->bindValue(":payment_id", $order->getPaymentId(), PDO::PARAM_INT);
         $result->bindValue(":created_date", $order->getCreatedDate(), PDO::PARAM_STR);
         $result->bindValue(":completion_time", $order->getCompletionTime(), PDO::PARAM_STR);
         $result->bindValue(':note', $order->getNote(), PDO::PARAM_STR);
@@ -51,8 +51,8 @@ class OrderDao extends Connect
         $result->bindValue(":product_id", $order->getProductId(), PDO::PARAM_INT);
         $result->bindValue(":quantity", $order->getQuantity(), PDO::PARAM_INT);
         $result->bindValue(":total", $order->getTotal(), PDO::PARAM_INT);
-        $result->bindValue(":shipping_id", $order->getShipping(), PDO::PARAM_STR);
-        $result->bindValue(":payment_id", $order->getPayment(), PDO::PARAM_STR);
+        $result->bindValue(":shipping_id", $order->getShippingId(), PDO::PARAM_STR);
+        $result->bindValue(":payment_id", $order->getPaymentId(), PDO::PARAM_STR);
         $result->bindValue(":completion_time", $order->getCompletionTime(), PDO::PARAM_STR);
         $result->bindValue(':note', $order->getNote(), PDO::PARAM_STR);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
@@ -92,7 +92,7 @@ class OrderDao extends Connect
 
     public function getAllProduct()
     {
-        $query = "SELECT id, name, image, price, quantity, description FROM products";
+        $query = "SELECT id, name, price, quantity, description FROM products";
         $result = $this->conn->prepare($query);
         $result->execute();
 

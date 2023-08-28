@@ -2,32 +2,25 @@
 include_once '../../model/Order.php';
 include_once '../../model/Product.php';
 include_once "../../dao/OrderDao.php";
-// include_once "../../dao/ProductDao.php";
 
 $errors = array(); // tạo 1 mảng lỗi
-$customerId = $productId = $quantity = $total = $shipping = $payment = $created_date = $completion_time = $note = ""; // khởi tạo giá trị
+$customerId = $productId = $quantity = $total = $shippingId = $paymentId = $created_date = $completion_time = $note = ""; // khởi tạo giá trị
 
 $order = new Order;
 $orderDao = new OrderDao;
-// $productDao = new ProductDao;
 
 $customers = $orderDao->getAllCustomer();
 $products = $orderDao->getAllProduct();
 $shippings = $orderDao->getAllShipping();
 $payments = $orderDao->getAllPayment();
 if (isset($_POST['submitOrder'])) {
-    function test_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+
     $customerId = test_input($_POST['customer_id']);
     $productId = test_input($_POST['product_id']);
     $quantity = test_input($_POST['quantity']);
-    $shipping = test_input($_POST['shipping_id']);
-    $payment = test_input($_POST['payment_id']);
+
+    $shippingId = test_input($_POST['shipping_id']);
+    $paymentId = test_input($_POST['payment_id']);
 
     // ngày tạo là ngày đặt order
     $created_date = new DateTime();
@@ -74,11 +67,11 @@ if (isset($_POST['submitOrder'])) {
         $errors['completion_time'] = "Delivery date must not be less than order creation date";
     }
 
-    if (empty($shipping)) {
+    if (empty($shippingId)) {
         $errors['shipping_id'] = "please choose shipping";
     }
 
-    if (empty($payment)) {
+    if (empty($paymentId)) {
         $errors['payment_id'] = "please choose payment";
     }
 
@@ -87,8 +80,8 @@ if (isset($_POST['submitOrder'])) {
         $order->setProductId($productId);
         $order->setQuantity($quantity);
         $order->setTotal($total);
-        $order->setShipping($shipping);
-        $order->setPayment($payment);
+        $order->setShippingId($shippingId);
+        $order->setPaymentId($paymentId);
         $order->setCreatedDate($created);
         $order->setCompletionTime($convert_completion_time);
         $order->setNote($note);
@@ -106,7 +99,13 @@ if (isset($_POST['submitOrder'])) {
 
         if ($result === true && $updateProductQuantity == true) {
             header('location: ../../view/OrderView/OrderListView.php');
-            // header('location: ../../view/ShippingView/ShippingCreateView.php');
         }
     }
+}
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }

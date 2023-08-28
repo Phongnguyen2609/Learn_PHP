@@ -8,10 +8,6 @@ include '../../controller/ShippingController/ShippingListController.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List User</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" /> -->
     <?php include '../header.php'; ?>
 </head>
 
@@ -59,7 +55,6 @@ include '../../controller/ShippingController/ShippingListController.php';
                             }
                         } else {
                             echo '<tbody class="position-relative">';
-                            // echo '<tr class="d-flex "><th class="">No Record Found</th></tr>';
                             echo '<tr><th class="position-absolute" style="left:50%">No Record Found</th></tr>';
                             echo '</tbody>';
                         }
@@ -68,7 +63,6 @@ include '../../controller/ShippingController/ShippingListController.php';
                 </table>
             </div>
         </div>
-        <script></script>
 </body>
 
 </html>

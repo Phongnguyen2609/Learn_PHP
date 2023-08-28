@@ -30,17 +30,6 @@ include '../../controller/ProductController/ProductListController.php';
                 </button>
             </div>
 
-            <!-- <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php if (isset($_SESSION['username'])) {
-                        echo $_SESSION['username'];
-                    } ?>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                </ul>
-            </div> -->
-
         </div>
 
         <!-- Table list User -->
@@ -50,7 +39,6 @@ include '../../controller/ProductController/ProductListController.php';
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Image</th>
                         <th scope="col">Price</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">description</th>
@@ -65,7 +53,6 @@ include '../../controller/ProductController/ProductListController.php';
                             <tr>
                                 <td><?php echo $product['id']; ?></td>
                                 <td><?php echo $product['name']; ?></td>
-                                <td><img src="../uploads/<?php echo $product['image']; ?>" alt="" width="100px" height="100px"></td>
                                 <td><?php echo $product['price']; ?></td>
                                 <td><?php echo $product['quantity']; ?></td>
                                 <td><?php echo $product['description']; ?></td>

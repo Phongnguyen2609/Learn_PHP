@@ -1,3 +1,6 @@
+<?php
+    include_once '../../controller/CustomerController/CustomerCreateController.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <?php include '../header.php';?>
+
 </head>
 
 <body>
@@ -26,7 +30,7 @@
                 </button>
             </div>
             <!-- Form User -->
-            <form action="../../controller/CustomerController/CustomerCreateController.php" method="post">
+            <form method="post">
                 <!-- title -->
 
                 <!-- Fields -->
@@ -80,20 +84,8 @@
                             ?>
                         </div>
                     </div>
-
-                    <div class="mb-2">
-                        <label for="password" class="form-label fw-bold">Password: </label>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" />
-                        <div class="text-danger">
-                            <?php
-                            if (isset($errors['password'])) {
-                                echo $errors['password'];
-                            }
-                            ?>
-                        </div>
-                    </div>
                 </div>
-                <div class="form_footer mb-3 ms-3">
+                <div class="modal-footer">
                     <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">
                         Reset
                     </button>

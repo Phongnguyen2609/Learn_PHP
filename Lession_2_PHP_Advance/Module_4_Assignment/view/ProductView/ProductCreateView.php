@@ -18,10 +18,10 @@
 <body>
     <div class="container ">
         <!-- Create User -->
-        <div class="btn_create-user mt-5 w-50 m-auto">
+        <div class="btn_create-user mt-5 w-50 m-auto border">
 
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Product</h5>
                 <!-- Sửa -->
                 <button>
                     <a href="./ProductListView.php">
@@ -36,6 +36,7 @@
                 <!-- Fields -->
                 <div class="modal-body">
 
+                <input type="hidden" name="id">
                     <div class="mb-3">
                         <label for="name" class="form-label fw-bold">Name:
                         </label>
@@ -86,14 +87,14 @@
                     </div>
                 </div>
                 <!-- button -->
-                <!-- <div class="modal-footer"> -->
+                <div class="modal-footer">
                 <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">
                     Reset
                 </button>
                 <button type="submit" name="submit" class="btn btn-primary">
                     submit
                 </button>
-                <!-- </div> -->
+                </div>
             </form>
         </div>
     </div>

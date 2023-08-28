@@ -2,14 +2,8 @@
 include '../../dao/ProductDao.php';
 
 $crud = new ProductDao;
-$query = "SELECT id, name, image, price, quantity, description FROM products";
+$query = "SELECT id, name, price, quantity, description FROM products";
 $cruds = $crud->getAllData($query);
-
-// var_dump($cruds);
-// die();
-
-// $products = $result->fetchAll(PDO::FETCH_ASSOC);
-
 
 if(isset($_GET['id'])){
 

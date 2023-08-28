@@ -3,11 +3,9 @@ include_once '../../controller/OrderController/OrderListController.php';
 include_once '../../dao/OrderDao.php';
 $orderDao = new OrderDao;
 $resultIndex = $order->getCountOrder();
-// var_dump($resultIndex);
-// die;
+
 $resultQuantity = $order->getSumQuantityOrder();
-// var_dump($resultQuantity);
-// die;
+
 $resultTotalOrder = $order->getSumTotalOrder();
 ?>
 <!DOCTYPE html>
@@ -84,7 +82,6 @@ $resultTotalOrder = $order->getSumTotalOrder();
                         }
                     } else {
                         echo '<tbody class="position-relative">';
-                        // echo '<tr class="d-flex "><th class="">No Record Found</th></tr>';
                         echo '<tr><th class="position-absolute" style="left:50%">No Record Found</th></tr>';
                         echo '</tbody>';
                     }

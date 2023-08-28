@@ -5,20 +5,20 @@ class Order {
     private $productId;
     private $quantity;
     private $total;
-    private $shipping;
-    private $payment;
+    private $shippingId;
+    private $paymentId;
     private $created_date;
     private $completion_time;
     private $note;
 
-    public function __construct($customerId ="", $productId = "", $quantity = "", $total = "", $shipping = "", $payment = "", $created_date = "", $completion_time = "", $note ="")
+    public function __construct($customerId ="", $productId = "", $quantity = "", $total = "", $shippingId = "", $paymentId = "", $created_date = "", $completion_time = "", $note ="")
     {
         $this->customerId = $customerId;
         $this->productId = $productId;
         $this->quantity = $quantity;
         $this->total = $total;        
-        $this->shipping = $shipping;        
-        $this->payment = $payment;        
+        $this->shippingId = $shippingId;        
+        $this->paymentId = $paymentId;        
         $this->created_date = $created_date;        
         $this->completion_time = $completion_time;        
         $this->note = $note;        
@@ -65,20 +65,20 @@ class Order {
         return $this->total;
     }
 
-    public function setShipping($shipping){
-        $this->shipping = $shipping;
+    public function setShippingId($shippingId){
+        $this->shippingId = $shippingId;
     }
 
-    public function getShipping(){
-        return $this->shipping;
+    public function getShippingId(){
+        return $this->shippingId;
     }
 
-    public function setPayment($payment){
-        $this->payment = $payment;
+    public function setPaymentId($paymentId){
+        $this->paymentId = $paymentId;
     }
 
-    public function getPayment(){
-        return $this->payment;
+    public function getPaymentId(){
+        return $this->paymentId;
     }
 
     public function setCreatedDate($created_date){

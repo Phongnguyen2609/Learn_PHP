@@ -15,7 +15,6 @@ if(isset($_POST['submit'])){
     $email = test_input($_POST['email']);
     $phone = test_input($_POST['phone']);
     $address = test_input($_POST['address']);
-    $password = test_input($_POST['password']);
     if(empty($username)){
         $errors['username'] = 'please enter username';
     }
@@ -38,27 +37,16 @@ if(isset($_POST['submit'])){
         $errors['address'] = 'please enter address';
     }
 
-    if(empty($password)){
-        $errors['password'] = 'please enter password';
-    } else if(strlen($password) <5){
-        $errors['password'] = 'password must greate than 5 characters';
-    }
-
     if(count($errors) === 0){
         $customer->setUsername($username);
         $customer->setEmail($email);
         $customer->setPhone($phone);
         $customer->setAddress($address);
-        // $pass_hash = password_hash($password, PASSWORD_DEFAULT);
-        $customer->setPassword($password);
-
 
         $result = $customerDao->database_add($customer);
         if($result){
            header('location: ../../view/CustomerView/CustomerListView.php');
         }
-    } else {
-        include '../../view/CustomerView/CustomerCreateView.php';
     }
 
 }

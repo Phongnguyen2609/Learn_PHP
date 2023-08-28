@@ -11,6 +11,7 @@ if (isset($_POST['submit'])) {
     $product = new Product;
     $productDao = new ProductDao;
 
+    $id = test_input($_POST['id']);
     $name = test_input($_POST['name']);
     $price = test_input($_POST['price']);
     $quantity = test_input($_POST['quantity']);
@@ -37,13 +38,18 @@ if (isset($_POST['submit'])) {
         $product->setPrice($price);
         $product->setQuantity($quantity);
         $product->setDescription($description);
-        $result = $productDao->addProduct($product);
 
-        if ($result) {
-            header('location: ../view/ProductView/ProductCreateView.php');
+        if(empty($id)){
+            $result = $productDao->addProduct($product);
+            if ($result) {
+                header('location: ../view/ProductView/ProductListView.php');
+            }
+        } else {
+            $result = $productDao->updateProduct($id, $product);
+            if ($result) {
+                header('location: ../view/ProductView/ProductListView.php');
+            }
         }
-    } else {
-        include '../view/ProductView/ProductCreateView.php';
     }
 }
 function test_input($data)

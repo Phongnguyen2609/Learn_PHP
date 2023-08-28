@@ -1,6 +1,5 @@
 <?php
-include '../../dao/ProductDao.php';
-// $usernameValue = $emailValue = $phoneValue = $addressValue = "";
+include_once '../../controller/ProductController/ProductCreateUpdateController.php';
 if (isset($_GET['id'])) {
     $productDao = new ProductDao;
 
@@ -11,7 +10,6 @@ if (isset($_GET['id'])) {
     foreach ($result as $item) {
         $id = $item['id'];
         $name = $item['name'];
-        $image = $item['fileUpload'];
         $price = $item['price'];
         $quantity = $item['quantity'];
         $description = $item['description'];
@@ -35,7 +33,7 @@ if (isset($_GET['id'])) {
 <body>
     <div class="container ">
         <!-- Create User -->
-        <div class="btn_create-user mt-5 w-50 m-auto">
+        <div class="btn_create-user mt-5 w-50 m-auto border">
 
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -47,7 +45,7 @@ if (isset($_GET['id'])) {
                 </button>
             </div>
             <!-- Form User -->
-            <form action="../../controller/ProductControoler/ProductEditController.php" method="post" enctype="multipart/form-data">
+            <form method="post">
                 <!-- title -->
 
                 <!-- Fields -->
@@ -65,18 +63,6 @@ if (isset($_GET['id'])) {
                             }
                             ?>
                         </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="fileUpload" class="form-label fw-bold">Image: </label>
-                        <input type="file" name="fileUpload" class="form-control" id="fileUpload" value="<?php echo $image ?>" />
-                        <!-- <div class="text-danger">
-                            <?php
-                            if (isset($errors['fileUpload'])) {
-                                echo $errors['fileUpload'];
-                            }
-                            ?>
-                        </div> -->
                     </div>
 
                     <div class="mb-3">
@@ -116,18 +102,16 @@ if (isset($_GET['id'])) {
                     </div>
                 </div>
                 <!-- button -->
-                <!-- <div class="modal-footer"> -->
+                <div class="modal-footer">
                 <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">
                     Reset
                 </button>
                 <button type="submit" name="submit" class="btn btn-primary">
                     submit
                 </button>
-                <!-- </div> -->
+                </div>
             </form>
-            <!-- <div>
-                <a href="LoginView.php">login</a>
-            </div> -->
+
         </div>
     </div>
 </body>

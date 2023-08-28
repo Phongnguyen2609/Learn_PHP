@@ -120,18 +120,16 @@ include '../../dao/CustomerDao.php';
                     </div>
                 </div>
                 <!-- button -->
-                <!-- <div class="modal-footer"> -->
+                <div class="modal-footer">
                 <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">
                     Reset
                 </button>
                 <button type="submit" name="submit" class="btn btn-primary">
                     submit
                 </button>
-                <!-- </div> -->
+                </div>
             </form>
-            <!-- <div>
-                <a href="LoginView.php">login</a>
-            </div> -->
+
         </div>
     </div>
 </body>
