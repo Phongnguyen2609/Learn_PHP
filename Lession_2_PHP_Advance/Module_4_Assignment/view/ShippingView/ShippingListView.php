@@ -47,8 +47,8 @@ include '../../controller/ShippingController/ShippingListController.php';
                                     <td><?php echo $shipping['shipping_type']; ?></td>
                                     <td>
                                         <!-- <a href="student-view.php?id=<?php echo $shipping['id']; ?>" class="btn btn-info btn-sm">View</a> -->
-                                        <a href="ShippingEditView.php?id=<?php echo $shipping['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                                        <a href="../../controller/ShippingController/ShippingListController.php?id=<?php echo $shipping['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">delete</a>
+                                        <a href="ShippingEditView.php?id=<?php echo $shipping['id']; ?>" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="../../controller/ShippingController/ShippingListController.php?id=<?php echo $shipping['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa-solid fa-trash"></i></a>
                                     </td>
                                 </tr>
                         <?php

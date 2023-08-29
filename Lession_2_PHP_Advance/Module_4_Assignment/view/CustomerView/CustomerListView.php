@@ -12,7 +12,7 @@ include '../../controller/CustomerController/CustomerListController.php';
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <?php include '../header.php';?>
+    <?php include '../header.php'; ?>
 </head>
 
 <body>
@@ -29,18 +29,6 @@ include '../../controller/CustomerController/CustomerListController.php';
                     <a href="./CustomerCreateView.php" alt="create user" class="text-white text-decoration-none">Create Customer</a>
                 </button>
             </div>
-
-            <!-- <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php if (isset($_SESSION['username'])) {
-                        echo $_SESSION['username'];
-                    } ?>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                </ul>
-            </div> -->
-
         </div>
 
         <!-- Table list User -->
@@ -68,8 +56,10 @@ include '../../controller/CustomerController/CustomerListController.php';
                             <td><?php echo $customer['address']; ?></td>
                             <td>
                                 <!-- <a href="student-view.php?id=<?php echo $customer['id']; ?>" class="btn btn-info btn-sm">View</a> -->
-                                <a href="CustomerEditView.php?id=<?php echo $customer['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="../controller/CustomerListController.php?id=<?php echo $customer['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">delete</a>
+                                <a href="CustomerEditView.php?id=<?php echo $customer['id']; ?>" class="btn btn-warning btn-sm">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="../controller/CustomerListController.php?id=<?php echo $customer['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                     <?php

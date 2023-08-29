@@ -7,11 +7,7 @@ include '../../controller/PaymentController/PaymentListController.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List User</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" /> -->
+    <title>List Payment</title>
     <?php include '../header.php'; ?>
 </head>
 
@@ -51,8 +47,8 @@ include '../../controller/PaymentController/PaymentListController.php';
                                     <td><?php echo $payment['payment_type']; ?></td>
                                     <td>
                                         <!-- <a href="student-view.php?id=<?php echo $payment['id']; ?>" class="btn btn-info btn-sm">View</a> -->
-                                        <a href="PaymentEditView.php?id=<?php echo $payment['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                                        <a href="../../controller/PaymentController/PaymentListController.php?id=<?php echo $payment['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">delete</a>
+                                        <a href="PaymentEditView.php?id=<?php echo $payment['id']; ?>" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="../../controller/PaymentController/PaymentListController.php?id=<?php echo $payment['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa-solid fa-trash"></i></a>
                                     </td>
                                 </tr>
                         <?php

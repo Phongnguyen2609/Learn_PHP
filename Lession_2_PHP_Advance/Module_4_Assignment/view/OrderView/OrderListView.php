@@ -14,7 +14,7 @@ $resultTotalOrder = $order->getSumTotalOrder();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List User</title>
+    <title>List Order</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
@@ -73,9 +73,12 @@ $resultTotalOrder = $order->getSumTotalOrder();
                                 <td><?php echo $order['completion_time']; ?></td>
                                 <td><?php echo $order['note']; ?></td>
                                 <td>
-                                    <!-- <a href="student-view.php?id=<?php echo $order['id']; ?>" class="btn btn-info btn-sm">View</a> -->
-                                    <a href="OrderEditView.php?id=<?php echo $order['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="../../controller/OrderController/OrderListController.php?id=<?php echo $order['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">delete</a>
+                                    <a href="OrderEditView.php?id=<?php echo $order['id']; ?>" class="btn btn-warning btn-sm" ><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="../../controller/OrderController/OrderListController.php?id=<?php echo $order['id']; ?>" 
+                                    class="btn btn-danger btn-sm" 
+                                    onclick="return confirm('Are you sure you want to delete this item?');" alt="delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
                                 </td>
                             </tr>
                     <?php

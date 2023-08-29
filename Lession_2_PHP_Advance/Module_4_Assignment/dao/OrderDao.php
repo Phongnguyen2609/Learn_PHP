@@ -10,7 +10,7 @@ class OrderDao extends Connect
 
     public function getAllOrder()
     {
-        $query = "SELECT id, customer_id, product_id, quantity, shipping_id, payment_id, created_date, completion_time, note FROM orders";
+        $query = "SELECT id, customer_id, product_id, quantity, shipping_id, payment_id, created_date, completion_time, note, status FROM orders";
         $result = $this->conn->prepare($query);
         $result->execute();
         $orders = $result->fetchAll(PDO::FETCH_ASSOC);

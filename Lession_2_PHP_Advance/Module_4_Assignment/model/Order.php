@@ -21,7 +21,7 @@ class Order {
         $this->paymentId = $paymentId;        
         $this->created_date = $created_date;        
         $this->completion_time = $completion_time;        
-        $this->note = $note;        
+        $this->note = $note;   
     }
 
     //SETTER + GETTER
