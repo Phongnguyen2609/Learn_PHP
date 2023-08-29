@@ -8,11 +8,12 @@ $customerId = $productId = $quantity = $total = $shippingId = $paymentId = $crea
 
 $order = new Order;
 $orderDao = new OrderDao;
-
+// gọi câu lệnh lấy ra danh sách
 $customers = $orderDao->getAllCustomer();
 $products = $orderDao->getAllProduct();
 $shippings = $orderDao->getAllShipping();
 $payments = $orderDao->getAllPayment();
+
 if (isset($_POST['submitOrder'])) {
 
     $customerId = test_input($_POST['customer_id']);
@@ -44,24 +45,29 @@ if (isset($_POST['submitOrder'])) {
         $errors['quantity'] = "please enter quantity";
     }
 
-    //check dữ liệu quantity
-    $productDetail = $orderDao->detailProduct($productId);
+    // Từ productId ở trên sẽ lấy ra product detail 
+    // và lấy ra được giá trị của product
+    $productDetail = $orderDao->detailProduct($productId); // gọi đến productDetai
     $productQuantity = $productPrice = "";
+    // cho vào vòng lặp để lấy ra các giá trị trong product
     foreach ($productDetail as $item) {
         $productQuantity = $item['quantity'];
         $productPrice = $item['price'];
     }
+    // OrderQuantity sẽ không được lớn hơn ProductQuantity Nếu không sẽ báo lỗi
     if ($quantity > $productQuantity) {
         $errors['quantity'] = "The quantity purchased cannot be greater than the quantity in stock. the remaining number is " . $productQuantity;
     }
 
-    // lấy id product lấy ra giá trị tiền
+    // Tính Total = OrderQuantity * ProductPrice
     $total = intval($quantity) * floatval($productPrice);
 
     if (empty($dateTime)) {
         $errors['completion_time'] = "please enter completion date";
     }
 
+    // so sánh ngày hiện tại với ngày giao hàng
+    // ngày giao hàng không thể nhỏ hơn ngày hiện tại
     $compareResult = strcmp($created, $convert_completion_time);
     if ($compareResult > 0) {
         $errors['completion_time'] = "Delivery date must not be less than order creation date";
@@ -75,6 +81,7 @@ if (isset($_POST['submitOrder'])) {
         $errors['payment_id'] = "please choose payment";
     }
 
+    // Nếu không có lỗi thì sẽ được truyền vào Obj order thông qua phương thức setter
     if (count($errors) === 0) {
         $order->setCustomerId($customerId);
         $order->setProductId($productId);
@@ -86,12 +93,13 @@ if (isset($_POST['submitOrder'])) {
         $order->setCompletionTime($convert_completion_time);
         $order->setNote($note);
 
+        // thực thi câu lệnh addOrder
         $result = $orderDao->addOrder($order);
 
-        // update quantity của bảng product
-        // sẽ truyền vào 2 giá trị đó là id của product và giá trị của quantity product
+        // Khi add order thành công . Product sẽ trừ đi OrderQuantity
+        // và update lại  Product Quantity của bảng product
+        // Khi update sẽ truyền vào 2 giá trị đó là id của product và giá trị của quantity product
         // id thì chính là product_id;
-        // quantity sẽ là trừ đi từ quantity order
         $resultQuantity = $productQuantity - $quantity;
         $ObjProduct = new Product;
         $ObjProduct->setQuantity($resultQuantity);

@@ -46,24 +46,24 @@ include '../../controller/CustomerController/CustomerListController.php';
                 </thead>
                 <tbody>
                     <?php
-                    if($customers != 0){
-                    foreach ($customers as $customer) {
+                    if ($customers != 0) {
+                        foreach ($customers as $customer) {
                     ?>
-                        <tr>
-                            <td><?php echo $customer['id']; ?></td>
-                            <td><?php echo $customer['username']; ?></td>
-                            <td><?php echo $customer['email']; ?></td>
-                            <td><?php echo $customer['phone']; ?></td>
-                            <td><?php echo $customer['address']; ?></td>
-                            <td>
-                                <!-- <a href="student-view.php?id=<?php echo $customer['id']; ?>" class="btn btn-info btn-sm">View</a> -->
-                                <a href="CustomerEditView.php?id=<?php echo $customer['id']; ?>" class="btn btn-warning btn-sm">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                <a href="../controller/CustomerListController.php?id=<?php echo $customer['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <?php
+                            <tr>
+                                <td><?php echo $customer['id']; ?></td>
+                                <td><?php echo $customer['username']; ?></td>
+                                <td><?php echo $customer['email']; ?></td>
+                                <td><?php echo $customer['phone']; ?></td>
+                                <td><?php echo $customer['address']; ?></td>
+                                <td>
+                                    <!-- <a href="student-view.php?id=<?php echo $customer['id']; ?>" class="btn btn-info btn-sm">View</a> -->
+                                    <a href="CustomerEditView.php?id=<?php echo $customer['id']; ?>" class="btn btn-warning btn-sm">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a href="../controller/CustomerListController.php?id=<?php echo $customer['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                    <?php
                         }
                     } else {
                         echo '<tbody class="position-relative">';

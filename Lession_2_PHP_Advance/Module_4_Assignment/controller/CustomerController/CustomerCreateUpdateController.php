@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
             if ($result) {
                 header('location: ../../view/CustomerView/CustomerListView.php');
             }
-        } else {
+        } else { // Nếu id tồn tại thì sẽ là cập nhật
             // thực thi câu lệnh mysql
             $result = $customerDao->updateCustomer($id, $customer);
             if ($result) {

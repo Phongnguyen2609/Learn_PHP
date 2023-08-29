@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
         $product->setQuantity($quantity);
         $product->setDescription($description);
 
-        if(empty($id)){
+        if (empty($id)) {
             $result = $productDao->addProduct($product);
             if ($result) {
                 header('location: ../../view/ProductView/ProductListView.php');

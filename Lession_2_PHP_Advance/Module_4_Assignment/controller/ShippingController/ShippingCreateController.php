@@ -9,30 +9,29 @@ $shippingType = $result = "";
 $shipping = new Shipping();
 $shippingDao = new ShippingDao;
 
-if(isset($_POST['submitShipping'])){
+if (isset($_POST['submitShipping'])) {
     $id = test_input($_POST['id']);
 
     $shippingType = test_input($_POST['shipping_type']);
-    
-    if(empty($shippingType)){
+
+    if (empty($shippingType)) {
         $errors['shipping_type'] = "please enter shipping type";
     }
 
-    if(!count($errors)){
+    if (!count($errors)) {
         $shipping->setShippingType($shippingType);
 
-        if(empty($id)){
+        if (empty($id)) {
             $result = $shippingDao->addShipping($shipping);
-            if($result){
+            if ($result) {
                 header('location:../../view/ShippingView/ShippingListView.php');
             }
         } else {
             $result = $shippingDao->updateShipping($id, $shipping);
-            if($result){
+            if ($result) {
                 header('location:../../view/ShippingView/ShippingListView.php');
             }
         }
-
     }
 }
 function test_input($data)
