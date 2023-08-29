@@ -10,10 +10,9 @@ class ProductDao extends Connect{
     public function getAllData($query){
         $result = $this->conn->prepare($query);
         $result->execute();
-        
-        $cruds = $result->fetchAll(PDO::FETCH_ASSOC);
-        if(count($cruds) > 0){
-            return $cruds;
+        $products = $result->fetchAll(PDO::FETCH_ASSOC);
+        if(count($products) > 0){
+            return $products;
         } else {
             return false;
         }

@@ -1,5 +1,5 @@
 <?php
-include '../../controller/PaymentController/PaymentListController.php';
+include_once '../../controller/PaymentController/PaymentListController.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@ include '../../controller/PaymentController/PaymentListController.php';
                     <span>
                         <i class="fa-solid fa-plus"></i>
                     </span>
-                    <a href="./PaymentCreateView.php" alt="create product" class="text-white text-decoration-none">Create Product</a>
+                    <a href="./PaymentCreateView.php" alt="create product" class="text-white text-decoration-none">Create Payment</a>
                 </button>
 
             </div>
@@ -56,7 +56,7 @@ include '../../controller/PaymentController/PaymentListController.php';
                         } else {
                             echo '<tbody class="position-relative">';
                             // echo '<tr class="d-flex "><th class="">No Record Found</th></tr>';
-                            echo '<tr><th class="position-absolute" style="left:50%">No Record Found</th></tr>';
+                            echo '<tr><th class="position-absolute" style="left:45%">No Record Found</th></tr>';
                             echo '</tbody>';
                         }
                         ?>
@@ -64,7 +64,6 @@ include '../../controller/PaymentController/PaymentListController.php';
                 </table>
             </div>
         </div>
-        <script></script>
 </body>
 
 </html>

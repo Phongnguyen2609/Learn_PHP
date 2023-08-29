@@ -22,7 +22,7 @@ include '../../controller/ShippingController/ShippingListController.php';
                     <span>
                         <i class="fa-solid fa-plus"></i>
                     </span>
-                    <a href="./ShippingCreateView.php" alt="create product" class="text-white text-decoration-none">Create Product</a>
+                    <a href="./ShippingCreateView.php" alt="create product" class="text-white text-decoration-none">Create Shipping</a>
                 </button>
 
             </div>
@@ -55,7 +55,7 @@ include '../../controller/ShippingController/ShippingListController.php';
                             }
                         } else {
                             echo '<tbody class="position-relative">';
-                            echo '<tr><th class="position-absolute" style="left:50%">No Record Found</th></tr>';
+                            echo '<tr><th class="position-absolute" style="left:45%">No Record Found</th></tr>';
                             echo '</tbody>';
                         }
                         ?>

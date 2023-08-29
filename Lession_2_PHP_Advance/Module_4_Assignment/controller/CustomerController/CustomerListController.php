@@ -2,7 +2,8 @@
 include '../../dao/CustomerDao.php';
 
 $customerDao = new CustomerDao;
-$customers = $customerDao->getAllData();
+$query = "SELECT id, username, email, phone, address FROM customers";
+$customers = $customerDao->getAllData($query);
 
 if(isset($_GET['id'])){
 

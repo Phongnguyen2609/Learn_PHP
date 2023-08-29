@@ -1,6 +1,5 @@
 <?php
 include_once '../../controller/PaymentController/PaymentCreateUpdateController.php';
-// include_once '../../dao/PaymentDao.php';
 // khi inclue 2 file controller thì nó sẽ báo là connect không thể được khai báo , bởi vì Connect đã được sủ dụng
 
 if (isset($_GET['id'])) {

@@ -7,15 +7,14 @@ class PaymentDao extends Connect {
         parent::__construct();
     }
 
-    public function getAllPayment(){
-        $query = "SELECT id, payment_type FROM payments";
+    public function getAllPayment($query){
         $result = $this->conn->prepare($query);
         $result->execute();
-        $shippings = $result->fetchAll(PDO::FETCH_ASSOC);
-        if (count($shippings) > 0) {
-            return $shippings;
+        $payments = $result->fetchAll(PDO::FETCH_ASSOC);
+        if (count($payments) > 0) {
+            return $payments;
         } else {
-            return "Not record";
+            return false;
         }
     }
 

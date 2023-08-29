@@ -3,7 +3,7 @@ include '../../dao/ProductDao.php';
 
 $crud = new ProductDao;
 $query = "SELECT id, name, price, quantity, description FROM products";
-$cruds = $crud->getAllData($query);
+$products = $crud->getAllData($query);
 
 if(isset($_GET['id'])){
 

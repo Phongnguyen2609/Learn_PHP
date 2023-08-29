@@ -1,12 +1,5 @@
 <?php
 include_once '../../controller/OrderController/OrderListController.php';
-include_once '../../dao/OrderDao.php';
-$orderDao = new OrderDao;
-$resultIndex = $order->getCountOrder();
-
-$resultQuantity = $order->getSumQuantityOrder();
-
-$resultTotalOrder = $order->getSumTotalOrder();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,10 +66,8 @@ $resultTotalOrder = $order->getSumTotalOrder();
                                 <td><?php echo $order['completion_time']; ?></td>
                                 <td><?php echo $order['note']; ?></td>
                                 <td>
-                                    <a href="OrderEditView.php?id=<?php echo $order['id']; ?>" class="btn btn-warning btn-sm" ><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="../../controller/OrderController/OrderListController.php?id=<?php echo $order['id']; ?>" 
-                                    class="btn btn-danger btn-sm" 
-                                    onclick="return confirm('Are you sure you want to delete this item?');" alt="delete">
+                                    <a href="OrderEditView.php?id=<?php echo $order['id']; ?>" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="../../controller/OrderController/OrderListController.php?id=<?php echo $order['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');" alt="delete">
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </td>
@@ -85,17 +76,41 @@ $resultTotalOrder = $order->getSumTotalOrder();
                         }
                     } else {
                         echo '<tbody class="position-relative">';
-                        echo '<tr><th class="position-absolute" style="left:50%">No Record Found</th></tr>';
+                        echo '<tr><th class="position-absolute" style="left:45%">No Record Found</th></tr>';
                         echo '</tbody>';
                     }
                     ?>
                 </tbody>
             </table>
             <!-- Tính tổng đơn hàng -->
-            <div class="d-flex justify-content-evenly">
-                <span class="fw-bold">Number of orders: <?php echo $resultIndex; ?></span>
-                <span class="fw-bold">Total Product: <?php echo $resultQuantity ?></span>
-                <span class="fw-bold">Total Price Order: <?php echo $resultTotalOrder ?></span>
+            <div class="d-flex justify-content-evenly mt-5">
+                <span class="fw-bold">Number of orders:
+                    <?php
+                        if($resultIndex == 0){
+                            echo $resultIndex = 0;
+                        } else {
+                            echo $resultIndex;
+                        }
+                    ?>
+                </span>
+                <span class="fw-bold">Total Quantity Product: 
+                <?php
+                        if($resultQuantity == 0){
+                            echo $resultQuantity = 0;
+                        } else {
+                            echo $resultQuantity;
+                        }
+                    ?>
+                </span>
+                <span class="fw-bold">Total Price Order: 
+                    <?php  
+                        if($resultTotalOrder == 0){
+                            echo $resultTotalOrder = 0;
+                        } else {
+                            echo $resultTotalOrder;
+                        }
+                    ?>
+                </span>
             </div>
         </div>
     </div>

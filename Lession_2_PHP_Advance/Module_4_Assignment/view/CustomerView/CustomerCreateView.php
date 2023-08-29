@@ -1,5 +1,5 @@
 <?php
-    include_once '../../controller/CustomerController/CustomerCreateController.php';
+    include_once '../../controller/CustomerController/CustomerCreateUpdateController.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +35,7 @@
 
                 <!-- Fields -->
                 <div class="modal-body">
+                    <input type="hidden" name="id">
 
                     <div class="mb-2">
                         <label for="username" class="form-label fw-bold">Username:

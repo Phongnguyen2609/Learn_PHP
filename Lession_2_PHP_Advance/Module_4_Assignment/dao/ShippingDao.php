@@ -7,15 +7,15 @@ class ShippingDao extends Connect {
         parent::__construct();
     }
 
-    public function getAllShipping(){
-        $query = "SELECT id, shipping_type FROM shipping";
+    public function getAllShipping($query){
         $result = $this->conn->prepare($query);
         $result->execute();
+        
         $shippings = $result->fetchAll(PDO::FETCH_ASSOC);
-        if (count($shippings) > 0) {
+        if(count($shippings) > 0){
             return $shippings;
         } else {
-            return "Not record";
+            return false;
         }
     }
 

@@ -47,8 +47,8 @@ include '../../controller/ProductController/ProductListController.php';
                 </thead>
                 <tbody>
                     <?php
-                    if ($cruds != 0) {
-                        foreach ($cruds as $product) {
+                    if ($products != 0) {
+                        foreach ($products as $product) {
                     ?>
                             <tr>
                                 <td><?php echo $product['id']; ?></td>
@@ -66,8 +66,7 @@ include '../../controller/ProductController/ProductListController.php';
                         }
                     } else {
                         echo '<tbody class="position-relative">';
-                        // echo '<tr class="d-flex "><th class="">No Record Found</th></tr>';
-                        echo '<tr><th class="position-absolute" style="left:50%">No Record Found</th></tr>';
+                        echo '<tr><th class="position-absolute" style="left:45%">No Record Found</th></tr>';
                         echo '</tbody>';
                     }
                     ?>

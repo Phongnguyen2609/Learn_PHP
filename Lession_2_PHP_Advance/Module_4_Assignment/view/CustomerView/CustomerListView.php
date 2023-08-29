@@ -46,6 +46,7 @@ include '../../controller/CustomerController/CustomerListController.php';
                 </thead>
                 <tbody>
                     <?php
+                    if($customers != 0){
                     foreach ($customers as $customer) {
                     ?>
                         <tr>
@@ -62,7 +63,12 @@ include '../../controller/CustomerController/CustomerListController.php';
                                 <a href="../controller/CustomerListController.php?id=<?php echo $customer['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
-                    <?php
+                        <?php
+                        }
+                    } else {
+                        echo '<tbody class="position-relative">';
+                        echo '<tr><th class="position-absolute" style="left:45%">No Record Found</th></tr>';
+                        echo '</tbody>';
                     }
                     ?>
                 </tbody>

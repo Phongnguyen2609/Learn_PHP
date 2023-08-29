@@ -42,12 +42,12 @@ if (isset($_POST['submit'])) {
         if(empty($id)){
             $result = $productDao->addProduct($product);
             if ($result) {
-                header('location: ../view/ProductView/ProductListView.php');
+                header('location: ../../view/ProductView/ProductListView.php');
             }
         } else {
             $result = $productDao->updateProduct($id, $product);
             if ($result) {
-                header('location: ../view/ProductView/ProductListView.php');
+                header('location: ../../view/ProductView/ProductListView.php');
             }
         }
     }

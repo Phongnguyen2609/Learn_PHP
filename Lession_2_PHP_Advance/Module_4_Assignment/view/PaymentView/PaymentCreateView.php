@@ -1,5 +1,5 @@
 <?php
-include_once '../../controller/ShippingController/ShippingCreateController.php';
+include_once '../../controller/PaymentController/PaymentCreateUpdateController.php';
 // khi inclue 2 file controller thì nó sẽ báo là connect không thể được khai báo , bởi vì Connect đã được sủ dụng
 ?>
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ include_once '../../controller/ShippingController/ShippingCreateController.php';
                     <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">
                         Reset
                     </button>
-                    <button type="submit" name="submitShipping" class="btn btn-primary">
+                    <button type="submit" name="submitPayment" class="btn btn-primary">
                         submit
                     </button>
                 </div>

@@ -2,7 +2,8 @@
 include '../../dao/ShippingDao.php';
 
 $shippingDao = new ShippingDao;
-$shippings = $shippingDao->getAllShipping();
+$query = "SELECT id, shipping_type FROM shipping";
+$shippings = $shippingDao->getAllShipping($query);
 
 if(isset($_GET['id'])){
 

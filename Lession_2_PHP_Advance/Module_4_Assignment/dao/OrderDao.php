@@ -17,7 +17,7 @@ class OrderDao extends Connect
         if (count($orders) > 0) {
             return $orders;
         } else {
-            return "Not record";
+            return false;
         }
     }
 
@@ -192,16 +192,16 @@ class OrderDao extends Connect
     }
 
     //join với bảng customer và bảng product
-    public function getAllOrderMultipTable()
+    public function getAllOrderMultipTable($query)
     {
-        $query = 'SELECT od.id, c.username, p.name, od.quantity, od.total, s.shipping_type, payments.payment_type, od.created_date, od.completion_time, od.note FROM orders as od left join customers as c ON od.customer_id = c.id left join products as p ON od.product_id = p.id LEFT JOIN shipping s ON od.shipping_id = s.id LEFT JOIN payments ON od.payment_id = payments.id';
+       
         $result = $this->conn->prepare($query);
         $result->execute();
         $orders = $result->fetchAll(PDO::FETCH_ASSOC);
         if (count($orders) > 0) {
             return $orders;
         } else {
-            return "Not record";
+            return false;
         }
     }
 
@@ -227,7 +227,7 @@ class OrderDao extends Connect
         $result->execute();
         $temp = $result->fetch(PDO::FETCH_ASSOC);
         if(empty($temp)){
-            $temp = 0;
+            return $temp = 0;
         }
 
         return $temp['order_count'];
@@ -239,7 +239,7 @@ class OrderDao extends Connect
         $result->execute();
         $temp = $result->fetch(PDO::FETCH_ASSOC);
         if(empty($temp)){
-            $temp = 0;
+            return $temp = 0;
         }
         return $temp['order_quantity'];
     }
@@ -250,7 +250,7 @@ class OrderDao extends Connect
         $result->execute();
         $temp = $result->fetch(PDO::FETCH_ASSOC);
         if(empty($temp)){
-            $temp = 0;
+            return $temp = 0;
         }
         return $temp['order_total'];
     }

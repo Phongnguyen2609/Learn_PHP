@@ -1,6 +1,6 @@
-<?php 
-include '../../dao/CustomerDao.php';
-// $usernameValue = $emailValue = $phoneValue = $addressValue = "";
+<?php
+    include_once '../../controller/CustomerController/CustomerCreateUpdateController.php';
+
     if(isset($_GET['id'])){
         $customerDao = new CustomerDao;
     
@@ -48,7 +48,7 @@ include '../../dao/CustomerDao.php';
                 </button>
             </div>
             <!-- Form User -->
-            <form action="../../controller//CustomerController/CustomerEditController.php" method="post">
+            <form method="post">
                 <!-- title -->
 
                 <!-- Fields -->

@@ -8,20 +8,19 @@ class CustomerDao extends Connect
         parent::__construct();
     }
 
-    public function getAllData()
+    public function getAllData($query)
     {
-        $query = "SELECT id, username, email, phone, address FROM customers";
         $result = $this->conn->prepare($query);
         $result->execute();
         $customers = $result->fetchAll(PDO::FETCH_ASSOC);
         if (count($customers) > 0) {
             return $customers;
         } else {
-            return "Not record";
+            return false;
         }
     }
 
-    public function database_add(Customer $customer)
+    public function addCustomer(Customer $customer)
     {
         $username = $customer->getUsername();
         $email = $customer->getEmail();
@@ -42,7 +41,7 @@ class CustomerDao extends Connect
         }
     }
 
-    public function customer_update($id, Customer $customer)
+    public function updateCustomer($id, Customer $customer)
     {
 
         $sql = "UPDATE customers SET username=:username, email=:email, phone=:phone, address=:address WHERE id=:id";
